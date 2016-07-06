@@ -1,0 +1,74 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    Node start=null,end=null;
+	int size = 0;
+	class Node{
+		int data;		
+		Node next;
+		public Node(int data){
+			this.data = data;
+			this.next = null;
+			
+		}
+	}
+
+	void insert(int d){
+		
+		if(start == null){
+			Node n = new Node(d);
+			start = n;
+			n.next = n;
+		}
+		else{
+			Node temp = start;
+	
+			while(temp.next != start){
+				temp = temp.next;
+			}
+			Node newn = new Node(d);
+			temp.next = newn;
+			newn.next = start;
+			size++;
+		}
+			
+	}
+	
+	void jump(int k, int n){
+		int e = 100;
+		Node p = start;
+		int i = 0;
+		do{
+			int j = (i + k)%n;
+			for(int l = 0; l < k; l++){
+				p = p.next;
+			}
+			if(p.data == 1)
+				e = e - 3;
+			else
+				e = e - 1;
+		}while(p != start);
+		System.out.println(e);
+	}
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+		Solution s8 = new Solution();
+		String s = sc.nextLine();
+		String[] str = s.split(" ");
+		int n = Integer.parseInt(str[0]);
+		int k = Integer.parseInt(str[1]);
+		String s1 = sc.nextLine();
+		StringTokenizer st = new StringTokenizer(s1, " ");
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		while(st.hasMoreTokens()) {
+			int x = Integer.parseInt(st.nextToken());
+			s8.insert(x);
+			
+		}
+		s8.jump(k,n);
+	}
+}
